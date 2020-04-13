@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  ghost-broker:
+    image: ghost:latest
+    container_name: ghost-broker
+    hostname: ghost-broker
+    volumes:
+      - ./ghost/config.production.json:/var/lib/ghost/config.production.json:z
+      - ./ghost/content:/var/lib/ghost/content:z
+    ports:
+      - 2369:2368
+    environment:
+      - NODE_ENV=production
+    restart: always
+    depends_on:
+      - mysql-broker
+    links:
+      - mysql-broker
+
+  mysql-broker:
+    image: mysql:5.7.29 # yeni versiyonlarda varsayılan login yöntemi değişmiş nodejs kütüphanesi henüz bunu desteklemiyor.
+    container_name: mysql-broker
+    volumes:
+       - ./dbdata:/var/lib/mysql:z
+    environment:
+      # Buradaki veriler ayrıca /ghost/config.production.json içerisine de yazılmalı.
+      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_DATABASE=ghostdata
+      - MYSQL_USER=ghostusr
+      - MYSQL_PASSWORD=
+    restart: always

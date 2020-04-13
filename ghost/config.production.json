@@ -1,0 +1,42 @@
+{
+    "url": "http://broker-ghost-cms-web.orkunucan.com",
+    "server": {
+        "port": 2368,
+        "host": "0.0.0.0"
+    },
+    "database": {
+        "client": "mysql",
+        "connection": {
+            "host": "mysql-broker",
+            "port": 3306,
+            "user": "ghostusr",
+            "password": "",
+            "database": "ghostdata",
+            "charset": "utf8mb4"
+        }
+    },
+    "mail": {
+        "from": "'Orkun Uçan - BLOG' <no-reply@orkunucan.com>", 
+        "transport": "SMTP",
+        "logger": true,
+        "options": {
+            "service": "gmail",
+            "host": "smtp.gmail.com",
+            "port": 465,
+            "auth": {
+                "user": "",
+                "pass": ""
+            }
+        }
+    },
+    "logging": {
+        "transports": [
+            "file",
+            "stdout"
+        ]
+    },
+    "process": "systemd",
+    "paths": {
+        "contentPath": "/var/lib/ghost/content"
+    }
+}
